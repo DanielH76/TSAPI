@@ -13,6 +13,12 @@ const getGuest = (req: Request, res: Response) => {
   SendRequest(req, res, query);
 };
 
+const getGuestsByEmployee = (req: Request, res: Response) => {
+  const id: string = req.params.id;
+  let query: string = `SELECT * FROM Guests WHERE EmployeeId = "${id}"`;
+  SendRequest(req, res, query);
+};
+
 const createGuest = (req: Request, res: Response) => {
   const id: string = uuidv4();
   let { firstName, employeeId, isOnsite } = req.body;
@@ -27,12 +33,6 @@ const updateGuest = (req: Request, res: Response) => {
   SendRequest(req, res, query);
 };
 
-const deleteGuest = (req: Request, res: Response) => {
-  const id: string = req.params.id;
-  let query: string = `DELETE FROM Guests WHERE GuestId = "${id}"`;
-  SendRequest(req, res, query);
-};
-
 const updateAbsence = (req: Request, res: Response) => {
   const id: string = req.params.id;
   let { isOnsite } = req.body;
@@ -40,9 +40,9 @@ const updateAbsence = (req: Request, res: Response) => {
   SendRequest(req, res, query);
 };
 
-const getGuestsByEmployee = (req: Request, res: Response) => {
+const deleteGuest = (req: Request, res: Response) => {
   const id: string = req.params.id;
-  let query: string = `SELECT * FROM Guests WHERE EmployeeId = "${id}"`;
+  let query: string = `DELETE FROM Guests WHERE GuestId = "${id}"`;
   SendRequest(req, res, query);
 };
 

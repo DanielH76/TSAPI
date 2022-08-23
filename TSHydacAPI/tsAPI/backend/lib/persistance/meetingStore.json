@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "timeOfMeeting":"2022-08-19T11:17:09.680Z",
+        "employeeParticipants": [1, 2, 3, 4],
+        "guestParticipants": [1, 2, 3]
+    },
+    {
+        "id":2,
+        "timeOfMeeting":"2022-08-19T11:17:00.000Z",
+        "employeeParticipants":[2,3],
+        "guestParticipants":[1]
+    }
+]    

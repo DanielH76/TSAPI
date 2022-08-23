@@ -1,0 +1,15 @@
+3,nielDa,true,Sad
+4,Danielaaaa,true,Neutral
+5,elDani,false,ANGRY
+8055,asdsadfasdf,true,Sad
+NaN,Jens,false,Happy
+NaN,Jens,false,Happy
+NaN,Jens,false,Happy
+NaN,Jens,false,Happy
+33872,Jens,false,Happy
+379765,Jens,false,Happy
+1660556284876,Jens,false,Happy
+1660556286935,Jens,false,Happy
+1660556287631,Jens,false,Happy
+1660556288279,Jens,false,Happy
+1660556288868,Jens,false,Happy

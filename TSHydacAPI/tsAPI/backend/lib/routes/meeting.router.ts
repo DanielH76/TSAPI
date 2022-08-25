@@ -8,16 +8,19 @@ import * as MeetingService from "./../modules/meeting.service";
 
 import { Meeting } from "./../modules/meeting.interface";
 
+import * as MeetingController from "./../controllers/meeting.controller";
+
 export const meetingRouter = express.Router();
 
-meetingRouter.get("/", async (req: Request, res: Response) => {
+/* meetingRouter.get("/", async (req: Request, res: Response) => {
   MeetingService.loadMeetings();
   return res.status(200).send("Check logs");
 });
+ */
 
-meetingRouter.get("/:id", async (req: Request, res: Response) => {});
+meetingRouter.get("/:id", MeetingController.getPersonsForMeeting);
 
-meetingRouter.post("/", async (req: Request, res: Response) => {
+/* meetingRouter.post("/", async (req: Request, res: Response) => {
   let meetingToCreate: Meeting = req.body;
   meetingToCreate.id = new Date().valueOf();
   try {
@@ -31,7 +34,9 @@ meetingRouter.post("/", async (req: Request, res: Response) => {
   } catch {
     return res.status(500).send("Internal server error");
   }
-});
+}); */
+
+meetingRouter.post("/", MeetingController.createMeeting);
 
 meetingRouter.delete("/:id", async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);

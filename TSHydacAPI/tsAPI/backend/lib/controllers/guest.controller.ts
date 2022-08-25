@@ -4,46 +4,46 @@ import * as Queries from "../config/queries";
 import { v4 as uuidv4 } from "uuid";
 
 const getAllGuests = (req: Request, res: Response) => {
-  let query: string = "SELECT * FROM Guests";
-  SendRequest(req, res, query);
+  SendRequest(req, res, Queries.GuestQueries.GetAll());
 };
 const getGuest = (req: Request, res: Response) => {
-  const id: string = req.params.id;
-  let query: string = `SELECT * FROM Guests WHERE GuestId = "${id}"`;
-  SendRequest(req, res, query);
+  SendRequest(req, res, Queries.GuestQueries.GetById(req.params.id));
 };
 
 const getGuestsByEmployee = (req: Request, res: Response) => {
-  const id: string = req.params.id;
-  let query: string = `SELECT * FROM Guests WHERE EmployeeId = "${id}"`;
-  SendRequest(req, res, query);
+  SendRequest(req, res, Queries.GuestQueries.GetGuestByEmployee(req.params.id));
 };
 
 const createGuest = (req: Request, res: Response) => {
+  console.log(req.body);
   const id: string = uuidv4();
   let { firstName, employeeId, isOnsite } = req.body;
-  let query: string = `INSERT INTO Guests(GuestId, FirstName, Employeeid, IsOnsite) VALUES("${id}", "${firstName}", "${employeeId}", ${isOnsite} )`;
-  SendRequest(req, res, query);
+  console.log(employeeId, isOnsite, isOnsite);
+  SendRequest(
+    req,
+    res,
+    Queries.GuestQueries.CreateGuest(id, firstName, employeeId, isOnsite)
+  );
 };
 
 const updateGuest = (req: Request, res: Response) => {
   const id: string = req.params.id;
   let { firstName, employeeId, isOnsite } = req.body;
-  let query: string = `UPDATE Guests SET FirstName = "${firstName}", EmployeeId = "${employeeId}", IsOnsite = ${isOnsite} WHERE GuestId = "${id}"`;
-  SendRequest(req, res, query);
+  SendRequest(
+    req,
+    res,
+    Queries.GuestQueries.UpdateGuest(id, firstName, employeeId, isOnsite)
+  );
 };
 
 const updateAbsence = (req: Request, res: Response) => {
   const id: string = req.params.id;
   let { isOnsite } = req.body;
-  let query: string = `UPDATE Guests SET IsOnsite = ${isOnsite} WHERE GuestId = "${id}" `;
-  SendRequest(req, res, query);
+  SendRequest(req, res, Queries.GuestQueries.UpdateAbsence(id, isOnsite));
 };
 
 const deleteGuest = (req: Request, res: Response) => {
-  const id: string = req.params.id;
-  let query: string = `DELETE FROM Guests WHERE GuestId = "${id}"`;
-  SendRequest(req, res, query);
+  SendRequest(req, res, Queries.GuestQueries.DeleteGuest(req.params.id));
 };
 
 export {

@@ -3,6 +3,6 @@
 export interface Meeting {
   id: number;
   timeOfMeeting: Date;
-  employeeParticipants: number[];
-  guestParticipants: number[];
+  employeeParticipants: string[];
+  guestParticipants: string[];
 }

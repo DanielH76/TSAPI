@@ -1,17 +1,26 @@
 // src/users/user.interface.ts
 
+/* export interface Person {
+  id: string;
+} */
+
 export interface Employee {
-  id: number;
-  guests?: Guest[];
+  /*  id: string;
   name: string;
-  isOnsite: boolean;
+  isOnsite: boolean; */
   mood: Mood;
 }
 
-export interface Guest {
-  id: number;
-  name: string;
+export interface Guest extends Person {
+  /*   id: string;
+  name: string; */
   employeeId: number;
+  //isOnsite: boolean;
+}
+
+export interface Person {
+  id: string;
+  name: string;
   isOnsite: boolean;
 }
 

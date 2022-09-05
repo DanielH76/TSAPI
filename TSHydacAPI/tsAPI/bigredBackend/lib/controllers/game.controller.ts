@@ -12,4 +12,9 @@ const postNewGame = async (req: Request, res: Response) => {
   SendRequest(req, res, query);
 };
 
-export { postNewGame };
+const getHighscores = async (req: Request, res: Response) => {
+  let query = "SELECT * FROM Games ORDER BY Highscore DESC LIMIT 10";
+  SendRequest(req, res, query);
+};
+
+export { postNewGame, getHighscores };

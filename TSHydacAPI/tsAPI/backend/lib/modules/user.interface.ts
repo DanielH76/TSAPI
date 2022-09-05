@@ -4,7 +4,7 @@
   id: string;
 } */
 
-export interface Employee {
+export interface Employee extends Person {
   /*  id: string;
   name: string;
   isOnsite: boolean; */

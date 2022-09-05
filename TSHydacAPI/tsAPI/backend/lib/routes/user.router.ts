@@ -13,6 +13,8 @@ import userController from "./../controllers/user.controller";
 import * as crypto from "crypto";
 import { rmSync } from "fs";
 
+import * as sql from "./../config/sequelize";
+
 /**
  * Router Definition
  */
@@ -24,6 +26,7 @@ export const userRouter = express.Router();
  */
 
 // GET EMPLOYEES
+userRouter.get("/test/test/test", sql.test);
 
 userRouter.get("/", userController.getAllUsers);
 

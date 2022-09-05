@@ -11,6 +11,7 @@ import * as userService from "./../modules/user.service";
 import { userRouter } from "./../routes/user.router";
 import { guestRouter } from "./../routes/guest.router";
 import { meetingRouter } from "./../routes//meeting.router";
+import { gameRouter } from "../../../bigredBackend/lib/routes/game.router";
 
 dotenv.config();
 
@@ -41,6 +42,8 @@ app.use("/api/users", userRouter);
 app.use("/api/guests", guestRouter);
 
 app.use("/api/meetings", meetingRouter);
+
+app.use("/api/game", gameRouter);
 
 /**
  * Server Activation

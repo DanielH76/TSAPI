@@ -1,6 +1,6 @@
 import { Game, Player } from "../modules/game.interface";
 
-export const calculateHighscore = async (
+export const calculateHighscore = (
   numClicks: number,
   avgTime: number,
   bestTime: number
@@ -8,16 +8,15 @@ export const calculateHighscore = async (
   const points: number = numClicks * 10;
   const avgTimeMultiplier: number = getAvgTimeMultiplier(avgTime);
   const bestTimeMultiplier: number = getBestTimeMultiplier(bestTime);
-
   const highscore: number = points * avgTimeMultiplier * bestTimeMultiplier;
 
   return highscore;
 };
 
 const getAvgTimeMultiplier = (avgTime: number): number => {
-  Math.floor(avgTime);
+  const roundedTime = getNearest100(avgTime);
 
-  switch (avgTime) {
+  switch (roundedTime) {
     case 900: {
       return 1.0;
     }
@@ -40,9 +39,8 @@ const getAvgTimeMultiplier = (avgTime: number): number => {
 };
 
 const getBestTimeMultiplier = (bestTime: number): number => {
-  Math.floor(bestTime);
-
-  switch (bestTime) {
+  const roundedTime = getNearest100(bestTime);
+  switch (roundedTime) {
     case 200: {
       return 2.0;
     }
@@ -59,4 +57,9 @@ const getBestTimeMultiplier = (bestTime: number): number => {
       return 1.0;
     }
   }
+};
+
+const getNearest100 = (num: number): number => {
+  const returnNum = Math.round(num / 100) * 100;
+  return returnNum;
 };

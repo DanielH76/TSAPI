@@ -66,6 +66,66 @@ const PersonMeetings = sequelize.define("PersonMeetings", {
 PersonMeetings.hasOne(Meetings);
 PersonMeetings.hasOne(Persons);
 
+const Players = sequelize.define("Players", {
+  PlayerId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true,
+  },
+  Username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: false,
+  },
+});
+
+const Games = sequelize.define("Games", {
+  GameId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true,
+  },
+  Score: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  AverageTime: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  NumberOfClicks: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  PlayerId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  BestTime: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+});
+
+const Highscores = sequelize.define("Highscores", {
+  HighscoreId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true,
+  },
+  GameId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  PlayerId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
+Highscores.hasOne(Players);
+Highscores.hasOne(Games);
+
 export const test = () => {
   try {
     sequelize.authenticate();
@@ -75,4 +135,4 @@ export const test = () => {
   }
 };
 
-export { Persons, Meetings, PersonMeetings };
+export { Persons, Meetings, PersonMeetings, Players, Games, Highscores };

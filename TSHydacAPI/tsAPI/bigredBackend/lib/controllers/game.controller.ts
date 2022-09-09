@@ -3,6 +3,7 @@ import { SendRequest } from "../../../backend/lib/config/mysql";
 import { v4 as uuidv4 } from "uuid";
 import { Game, Player } from "../modules/game.interface";
 import * as highscoreGenerator from "../composables/score.calculator";
+import * as sqlize from "../../../backend/lib/config/sequelize";
 
 const postNewGameWithHighscore = async (req: Request, res: Response) => {
   const id: string = uuidv4();
@@ -14,24 +15,57 @@ const postNewGameWithHighscore = async (req: Request, res: Response) => {
 };
 
 const postNewGameWithoutHighscore = async (req: Request, res: Response) => {
-  const GameId: string = uuidv4();
-  const HighscoreId: string = uuidv4();
+  const gameId: string = uuidv4();
+  const scoreId: string = uuidv4();
   let { avgTime, numClicks, playerId, bestTime } = req.body;
 
-  const highscore = highscoreGenerator.calculateHighscore(
+  const score = highscoreGenerator.calculateHighscore(
     numClicks,
     avgTime,
     bestTime
   );
 
-  console.log(highscore);
+  /* const gameToCreate: Game = await sqlize.Games.create({
+    GameId: gameId,
+    Score: score,
+    AverageTime: avgTime,
+    NumberOfClicks: numClicks,
+    PlayerId: playerId,
+    BestTime: bestTime,
+  });
 
-  let insert1: string = `INSERT INTO Games(GameId, Score, AverageTime, NumberOfClicks, PlayerId, BestTime) `;
-  let values1: string = `VALUES ('${GameId}', ${highscore}, ${avgTime}, ${numClicks}, '${playerId}', ${bestTime});`;
+  const highscoreToCreate: any = await sqlize.Highscores.create({
+    HighscoreId: scoreId,
+    GameId: gameId,
+    PlayerId: playerId,
+  });
 
-  const query: string = insert1.concat(values1);
+  let body = {
+    ...gameToCreate,
+    ...highscoreToCreate,
+  }; */
 
-  SendRequest(req, res, query);
+  // let insert1: string = `INSERT INTO Games(GameId, Score, AverageTime, NumberOfClicks, PlayerId, BestTime) `;
+  // let values1: string = `VALUES ('${id}', ${score}, ${avgTime}, ${numClicks}, '${playerId}', ${bestTime});`;
+
+  /* let transaction: string = "START TRANSACTION; ";
+  let insert1: string =
+    "INSERT INTO Games(GameId, score, AverageTime, NumberOfClicks, PlayerId, BestTime) ";
+  let values1: string = `VALUES ('${gameId}', ${score}, ${avgTime}, ${numClicks}, '${playerId}', ${bestTime});`;
+  let insert2: string = "INSERT INTO Highscores(HighscoreId, GameId, PlayerId)";
+  let values2: string = `VALUES('${scoreId}','${gameId}','${playerId}'); `;
+  let commit: string = "COMMIT;";
+
+  const query: string = transaction.concat(
+    insert1,
+    values1,
+    insert2,
+    values2,
+    commit
+  );
+
+  SendRequest(req, res, query); */
+  return res.status(200).json(body);
 };
 
 const getHighscores = async (req: Request, res: Response) => {

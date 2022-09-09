@@ -4,6 +4,6 @@ import * as GameController from "../controllers/game.controller";
 
 export const gameRouter = express.Router();
 
-gameRouter.post("/", GameController.postNewGame);
+gameRouter.post("/", GameController.postNewGameWithoutHighscore);
 
 gameRouter.get("/", GameController.getHighscores);

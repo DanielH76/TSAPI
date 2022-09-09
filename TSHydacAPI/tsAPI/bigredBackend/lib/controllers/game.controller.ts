@@ -29,7 +29,13 @@ const postNewGameWithoutHighscore = async (req: Request, res: Response) => {
 };
 
 const getHighscores = async (req: Request, res: Response) => {
-  let query = "SELECT * FROM Games ORDER BY Highscore DESC LIMIT 10";
+  let select: string = "SELECT Score, Username FROM Highscores";
+  let join1: string = "INNER JOIN Games ON Highscores.GameId = Games.GameId";
+  let join2: string =
+    "INNER JOIN Players ON Highscores.PlayerId = Players.PlayerId";
+  let order: string = "ORDER BY Score DESC";
+
+  let query: string = select.concat(join1, join2, order);
   SendRequest(req, res, query);
 };
 
